@@ -3,7 +3,7 @@ package entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Dishes")
+@Table(name = "menu")
 @NamedQuery(name = "getAll", query = "select c from Dish c")
 
 public class Dish {
