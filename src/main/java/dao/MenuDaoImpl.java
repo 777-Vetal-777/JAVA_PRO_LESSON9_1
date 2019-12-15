@@ -8,11 +8,10 @@ import java.util.List;
 
 
 public class MenuDaoImpl implements MenuDao {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 
     @Override
-    public void addDish(Dish dish) {
+    public void addDish(Dish dish,EntityManager entityManager) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(dish);
@@ -23,7 +22,7 @@ public class MenuDaoImpl implements MenuDao {
     }
 
     @Override
-    public void getDishWithParam(double fromPrice, double toPrice) {
+    public void getDishWithParam(double fromPrice, double toPrice,EntityManager entityManager) {
         TypedQuery<Dish> typedQuery = entityManager.createQuery("select c from Dish c where c.price between ?1 and ?2", Dish.class);
         typedQuery.setParameter(1, fromPrice);
         typedQuery.setParameter(2, toPrice);
@@ -35,7 +34,7 @@ public class MenuDaoImpl implements MenuDao {
     }
 
     @Override
-    public void selectDish() {
+    public void selectDish(EntityManager entityManager) {
         TypedQuery<Dish> dishTypedQuery = entityManager.createNamedQuery("getAll", Dish.class);
         List<Dish> list = dishTypedQuery.getResultList();
         for (Dish dish : list) {
@@ -45,7 +44,7 @@ public class MenuDaoImpl implements MenuDao {
     }
 
     @Override
-    public void getDishOnlyDisc() {
+    public void getDishOnlyDisc(EntityManager entityManager) {
         TypedQuery<Dish> typedQuery = entityManager.createQuery("select c from Dish c where c.discount <>0", Dish.class);
         List<Dish> dishList = typedQuery.getResultList();
         for (Dish dish : dishList) {
@@ -59,7 +58,7 @@ public class MenuDaoImpl implements MenuDao {
     }
 
     @Override
-    public void getDishRandom() {
+    public void getDishRandom(EntityManager entityManager) {
         TypedQuery<Dish> dishTypedQuery = entityManager.createQuery("select c from Dish c ", Dish.class);
         List<Dish> dishList = dishTypedQuery.getResultList();
         int dishOne = (int) (Math.random() * dishList.size());
@@ -70,7 +69,7 @@ public class MenuDaoImpl implements MenuDao {
         double weight = dishList.get(dishOne).getWeight() + dishList.get(dishTwo).getWeight() + dishList.get(dishThree).getWeight() +
                 dishList.get(dishFour).getWeight() + dishList.get(dishFive).getWeight();
         if (weight > 1000) {
-            this.getDishRandom();
+            this.getDishRandom(entityManager);
             return;
         }
 
@@ -83,7 +82,7 @@ public class MenuDaoImpl implements MenuDao {
 
     }
 
-    public void initial() {
+    public void initial(EntityManager entityManager) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(new Dish("pasta", 200, 150, 15));
