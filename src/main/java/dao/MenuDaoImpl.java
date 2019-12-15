@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class MenuDaoImpl implements MenuDao {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("AAA");
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
     EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override
@@ -23,12 +23,14 @@ public class MenuDaoImpl implements MenuDao {
     }
 
     @Override
-    public void getDishWithParam(int fromPrice, int toPrice) {
+    public void getDishWithParam(double fromPrice, double toPrice) {
         TypedQuery<Dish> typedQuery = entityManager.createQuery("select c from Dish c where c.price between ?1 and ?2", Dish.class);
         typedQuery.setParameter(1, fromPrice);
         typedQuery.setParameter(2, toPrice);
         List<Dish> dishList = typedQuery.getResultList();
-        System.out.println(dishList);
+        for(Dish dish: dishList){
+            System.out.println(dish);
+        }
 
     }
 

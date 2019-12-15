@@ -13,8 +13,8 @@ public class Main {
         System.out.println("Please choose some option.\n " +
                 "1- if you want to add new dish\n " +
                 "2- if you want to get random dishes up to 1 kg\n " +
-                "3- if you want to get some dishes from parameters\n " +
-                "4- if you want to get dishes with discount\n " +
+                "3- if you want to get some dishes with parameters\n " +
+                "4- if you want to get dishes with discount(%)\n " +
                 "5 - if you want to get All menu");
         System.out.print("Enter number: ");
         int num = scanner.nextInt();
@@ -24,8 +24,8 @@ public class Main {
             System.out.println("Please choose some option.\n " +
                     "1- if you want to add new dish\n " +
                     "2- if you want to get random dishes up to 1 kg\n " +
-                    "3- if you want to get some dishes from parameters\n " +
-                    "4- if you want to get dishes with discount\n " +
+                    "3- if you want to get some dishes with parameters\n " +
+                    "4- if you want to get dishes with discount(%)\n " +
                     "5 - if you want to get All menu\n " +
                     "0 - if you want to exit");
             System.out.print("Enter number: ");
@@ -54,9 +54,9 @@ public class Main {
                 break;
             case 3:
                 System.out.println("Enter from price");
-                int fromPrice = scanner.nextInt();
+                double fromPrice = scanner.nextInt();
                 System.out.println("Enter to price");
-                int toPrice = scanner.nextInt();
+                double toPrice = scanner.nextInt();
                 menuDao.getDishWithParam(fromPrice, toPrice);
                 break;
             case 4:
