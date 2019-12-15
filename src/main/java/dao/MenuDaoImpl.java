@@ -96,6 +96,7 @@ public class MenuDaoImpl implements MenuDao {
             entityManager.persist(new Dish("wine", 200, 100, 0));
             entityManager.persist(new Dish("sushi", 200, 200, 0));
             entityManager.getTransaction().commit();
+            
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
