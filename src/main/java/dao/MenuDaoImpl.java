@@ -24,19 +24,17 @@ public class MenuDaoImpl implements MenuDao {
 
     @Override
     public void getDishWithParam(int fromPrice, int toPrice) {
-        entityManager.getTransaction().begin();
         TypedQuery<Dish> typedQuery = entityManager.createQuery("select c from Dish c where c.price between ?1 and ?2", Dish.class);
         typedQuery.setParameter(1, fromPrice);
         typedQuery.setParameter(2, toPrice);
         List<Dish> dishList = typedQuery.getResultList();
         System.out.println(dishList);
-        entityManager.getTransaction().commit();
 
     }
 
     @Override
     public void selectDish() {
-        TypedQuery<Dish> dishTypedQuery = entityManager.createNamedQuery("getAll",Dish.class);
+        TypedQuery<Dish> dishTypedQuery = entityManager.createNamedQuery("getAll", Dish.class);
         List<Dish> list = dishTypedQuery.getResultList();
         for (Dish dish : list) {
             System.out.println(dish);
@@ -46,7 +44,6 @@ public class MenuDaoImpl implements MenuDao {
 
     @Override
     public void getDishOnlyDisc() {
-        entityManager.getTransaction().begin();
         TypedQuery<Dish> typedQuery = entityManager.createQuery("select c from Dish c where c.discount <>0", Dish.class);
         List<Dish> dishList = typedQuery.getResultList();
         for (Dish dish : dishList) {
@@ -56,7 +53,6 @@ public class MenuDaoImpl implements MenuDao {
 
         }
 
-        entityManager.getTransaction().commit();
 
     }
 
@@ -72,7 +68,6 @@ public class MenuDaoImpl implements MenuDao {
         double weight = dishList.get(dishOne).getWeight() + dishList.get(dishTwo).getWeight() + dishList.get(dishThree).getWeight() +
                 dishList.get(dishFour).getWeight() + dishList.get(dishFive).getWeight();
         if (weight > 1000) {
-            System.out.println("+++");
             this.getDishRandom();
             return;
         }
@@ -83,7 +78,6 @@ public class MenuDaoImpl implements MenuDao {
         System.out.println(dishList.get(dishThree));
         System.out.println(dishList.get(dishFour));
         System.out.println(dishList.get(dishFive));
-
 
     }
 

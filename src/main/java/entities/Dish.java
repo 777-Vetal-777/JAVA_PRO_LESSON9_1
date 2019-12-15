@@ -12,8 +12,8 @@ public class Dish {
     private int id;
     private String name;
     private int weight;
-    private int price;
-    private int discount;
+    private double price;
+    private double discount;
 
     public Dish(String name, int weight, int price, int discount) {
         this.name = name;
@@ -49,7 +49,7 @@ public class Dish {
         this.weight = weight;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -57,7 +57,7 @@ public class Dish {
         this.price = price;
     }
 
-    public int getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
